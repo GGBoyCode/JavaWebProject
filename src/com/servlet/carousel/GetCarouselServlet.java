@@ -34,6 +34,7 @@ public class GetCarouselServlet extends HttpServlet {
             } else {
                 jsonObject.put("code", 10000);
             }
+            //data内存放轮播图相对位置数据
             jsonObject.put("data", list);
             PrintWriter out = response.getWriter();
             out.print(jsonObject);
