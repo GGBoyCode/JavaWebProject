@@ -33,7 +33,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     //用户登录验证
-    public boolean SignIn(User user) throws Exception{
+    public boolean SignIn(User user) throws SQLException{
         if(FormatVerify(user)){
             return userDao.SignIn(user);
         } else {
@@ -42,7 +42,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     //用户注册
-    public boolean SignUp(User user) throws Exception{
+    public boolean SignUp(User user) throws SQLException{
         if(FormatVerify(user) && !userDao.SelectByUsername(user.getUsername())){
             return userDao.SignUp(user);
         } else {
@@ -56,6 +56,17 @@ public class UserServiceImpl implements IUserService {
             return userDao.UpdateSignInTime(user);
         } else {
           return false;
+        }
+    }
+
+    //获取用户信息
+    public User getUserInformation(String username) throws SQLException {
+        if(username == null) {
+            return null;
+        } else if(!userDao.SelectByUsername(username)) {
+            return null;
+        } else {
+            return userDao.getUserInformation(username);
         }
     }
 }

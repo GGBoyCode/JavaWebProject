@@ -13,6 +13,8 @@ public class User {
     private Timestamp signUpTime;   //用户注册时间
     private Timestamp signInTime;   //用户最后一次登录时间
 
+    public User() {this(null, null, null);}
+
     public User(String username,String password,Timestamp signInTime){
         this(username,password,signInTime,null);
     }

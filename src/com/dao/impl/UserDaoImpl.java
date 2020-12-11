@@ -4,6 +4,7 @@ import com.dao.IUserDao;
 import com.entity.User;
 import com.util.DBCP;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 //用户Dao实体类
 public class UserDaoImpl implements IUserDao {
     //用户登录查询
-    public boolean SignIn(User user) throws Exception{
+    public boolean SignIn(User user) throws SQLException{
         String sql = "select count(1) from user where username = ? and password = ?";
         Object[] params = new Object[]{user.getUsername(),user.getPassword()};
 
@@ -22,7 +23,7 @@ public class UserDaoImpl implements IUserDao {
     }
 
     //用户注册
-    public boolean SignUp(User user) throws Exception{
+    public boolean SignUp(User user) throws SQLException{
         String sql = "insert into user(username,password,signuptime,signintime) values(?,?,?,?)";
         Object[] params = new Object[]{user.getUsername(),user.getPassword(),user.getSignUpTime(),user.getSignInTime()};
 
@@ -33,7 +34,7 @@ public class UserDaoImpl implements IUserDao {
     }
 
     //根据username查询用户
-    public boolean SelectByUsername(String username) throws Exception{
+    public boolean SelectByUsername(String username) throws SQLException{
         String sql = "select count(1) from user where username = ?";
 
         QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
@@ -51,5 +52,13 @@ public class UserDaoImpl implements IUserDao {
         int count = queryRunner.update(sql,params);
 
         return count > 0;
+    }
+
+    //查询用户信息
+    public User getUserInformation(String username) throws SQLException {
+        String sql = "select * from user where username = ?";
+
+        QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
+        return queryRunner.query(sql, new BeanHandler<User>(User.class), username);
     }
 }
