@@ -65,7 +65,7 @@ public class CarouselDaoImpl implements ICarouselDao {
 
     //获取全部轮播图相对地址
     public List<String> getAllCarouselUrl() throws SQLException {
-        String sql = "select * from carousel";
+        String sql = "select url from carousel";
 
         QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
         return queryRunner.query(sql, new ColumnListHandler<String>());
