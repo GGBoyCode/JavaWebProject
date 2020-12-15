@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
-@WebServlet("//signUp")
+@WebServlet("/signUp")
 public class SignUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //获取用户名
