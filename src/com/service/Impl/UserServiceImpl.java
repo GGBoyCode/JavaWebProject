@@ -92,4 +92,22 @@ public class UserServiceImpl implements IUserService {
             return false;
         }
     }
+
+    //修改用户密码
+    public boolean UpdatePassword(User user) throws SQLException {
+        if(userDao.SelectByUsername(user.getUsername()) && user.getPassword() != null) {
+            return userDao.UpdatePassword(user);
+        } else {
+            return false;
+        }
+    }
+
+    //修改用户头像
+    public boolean UpdateUserPicture(User user) throws SQLException {
+        if(userDao.SelectByUsername(user.getUsername()) && user.getUserPicture()!= null) {
+            return userDao.UpdateUserPicture(user);
+        } else {
+            return false;
+        }
+    }
 }
