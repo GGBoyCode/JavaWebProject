@@ -1,8 +1,8 @@
 package com.util;
 
 import com.entity.Carousel;
+import com.entity.User;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang.RandomStringUtils;
 
@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
 
-//轮播图帮助类
-public class CarouselUtil {
+public class UserUtil {
     //文件夹名称
-    private static final String DIRNAME = "carousel";
+    private static final String DIRNAME = "avatar";
 
     //上传图片
-    public static Carousel upload(HttpServletRequest request) throws Exception {
-        Carousel carousel = new Carousel();
+    public static String upload(HttpServletRequest request) throws Exception {
+        String path = null;
         //检查是否为上传项
         if(ServletFileUpload.isMultipartContent(request)) {
             List<FileItem> fileItems = Util.getFileItems(request, DIRNAME);
@@ -37,7 +36,7 @@ public class CarouselUtil {
                         //重命名 在后面加8个随机字符串防止名字重复
                         filename = filename.substring(0, pointIndex) + RandomStringUtils.randomAlphanumeric(8) + "." + suffix;
                         //设置轮播图路径
-                        carousel.setUrl(Util.UPLOAD_PATH + "/" + DIRNAME + "/" + filename);
+                        path = Util.UPLOAD_PATH + "/" + DIRNAME + "/" + filename;
                         //检验上传是否为图片
                         if(suffix.matches("jpg|jpeg|png|")) {
                             //文件位置
@@ -48,18 +47,11 @@ public class CarouselUtil {
                         } else {
                             return null;
                         }
-                    } else {
-                        if("id".equals(item.getFieldName())) {
-                            //获取id
-                            carousel.setId(Integer.parseInt(item.getString()));
-                        } else {
-                            return null;
-                        }
                     }
                 }
             }
         }
 
-        return carousel;
+        return path;
     }
 }
