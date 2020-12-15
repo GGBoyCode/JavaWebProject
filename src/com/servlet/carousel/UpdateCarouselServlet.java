@@ -5,10 +5,8 @@ import com.entity.Carousel;
 import com.service.ICarouselService;
 import com.service.Impl.CarouselServiceImpl;
 import com.util.CarouselUtil;
-import org.apache.commons.fileupload.FileItem;
+import com.util.Util;
 import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 
 @WebServlet("/carousel/update")
 public class UpdateCarouselServlet extends HttpServlet {
@@ -36,7 +33,7 @@ public class UpdateCarouselServlet extends HttpServlet {
                 //获取图片绝对位置
                 String path = getServletContext().getRealPath("/") + url.replaceAll("/", "\\\\");
                 //将图片从服务器中删除
-                if(!carouselService.deleteCarousel(carousel.getId()) || !CarouselUtil.delete(path)) isSuccess = false;
+                if(!carouselService.deleteCarousel(carousel.getId()) || !Util.delete(path)) isSuccess = false;
             }
 
             if(carousel != null) {

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet("/user/information/update")
+@WebServlet("/user/update/information")
 public class UpdateUserInformationServlet extends HttpServlet {
     private IUserService userService = new UserServiceImpl();
 

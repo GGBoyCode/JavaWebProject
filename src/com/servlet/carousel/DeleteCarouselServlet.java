@@ -1,10 +1,10 @@
 package com.servlet.carousel;
 
 import com.alibaba.fastjson.JSONObject;
-import com.entity.Carousel;
 import com.service.ICarouselService;
 import com.service.Impl.CarouselServiceImpl;
 import com.util.CarouselUtil;
+import com.util.Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +29,7 @@ public class DeleteCarouselServlet extends HttpServlet {
                 //获取图片绝对位置
                 String path = getServletContext().getRealPath("/") + url.replaceAll("/", "\\\\");
                 //将图片从服务器中删除
-                if(!carouselService.deleteCarousel(id) || !CarouselUtil.delete(path)) isSuccess = false;
+                if(!carouselService.deleteCarousel(id) || !Util.delete(path)) isSuccess = false;
             } else {
                 isSuccess = false;
             }

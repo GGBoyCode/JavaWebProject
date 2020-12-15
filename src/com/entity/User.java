@@ -17,6 +17,11 @@ public class User {
 
     public User() {this(null, null, null);}
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public User(String username,String password,Timestamp signInTime){
         this(username,password,null, 0, 0,signInTime,null);
     }
