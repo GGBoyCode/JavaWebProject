@@ -27,7 +27,7 @@ public class SignUpServlet extends HttpServlet {
         //登录时间
         Timestamp signInTime = signUpTime;
         //创建用户实体
-        User user = new User(username,password, 0, 0,signInTime,signUpTime);
+        User user = new User(username, password, username, 0, 0, signInTime, signUpTime);
         //创建UserServiceImpl实体
         IUserService userService = new UserServiceImpl();
         boolean isSuccess = false;

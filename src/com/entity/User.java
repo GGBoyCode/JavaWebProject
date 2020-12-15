@@ -18,12 +18,13 @@ public class User {
     public User() {this(null, null, null);}
 
     public User(String username,String password,Timestamp signInTime){
-        this(username,password, 0, 0,signInTime,null);
+        this(username,password,null, 0, 0,signInTime,null);
     }
 
-    public User(String username,String password, int sex, int userType,Timestamp signInTime,Timestamp signUpTime){
+    public User(String username,String password, String name, int sex, int userType,Timestamp signInTime,Timestamp signUpTime){
         this.username = username;
         this.password = password;
+        this.name = name;
         this.sex = sex;
         this.userType = userType;
         this.signInTime = signInTime;

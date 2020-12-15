@@ -24,8 +24,8 @@ public class UserDaoImpl implements IUserDao {
 
     //用户注册
     public boolean SignUp(User user) throws SQLException{
-        String sql = "insert into user(username, password, sex, usertype, signuptime, signintime) values(?, ?, ?, ?, ?, ?)";
-        Object[] params = new Object[]{user.getUsername(), user.getPassword(), user.getSex(), user.getUserType(),user.getSignUpTime(), user.getSignInTime()};
+        String sql = "insert into user(username, password, name, sex, usertype, signuptime, signintime) values(?, ?, ?, ?, ?, ?, ?)";
+        Object[] params = new Object[]{user.getUsername(), user.getPassword(), user.getName(), user.getSex(), user.getUserType(),user.getSignUpTime(), user.getSignInTime()};
 
         QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
         int count = queryRunner.update(sql,params);
@@ -46,7 +46,7 @@ public class UserDaoImpl implements IUserDao {
     //更新用户登录时间
     public boolean UpdateSignInTime(User user) throws SQLException {
         String sql = "update user set signintime = ? where username = ?";
-        Object params = new Object[]{user.getSignInTime(),user.getUsername()};
+        Object[] params = new Object[]{user.getSignInTime(),user.getUsername()};
 
         QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
         int count = queryRunner.update(sql,params);
