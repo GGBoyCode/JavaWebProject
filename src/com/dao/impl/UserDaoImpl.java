@@ -61,4 +61,15 @@ public class UserDaoImpl implements IUserDao {
         QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
         return queryRunner.query(sql, new BeanHandler<User>(User.class), username);
     }
+
+    //更新用户信息
+    public boolean UpdateUserInformation(User user) throws SQLException {
+        String sql = "update user set name = ?, sex = ?, useraddress = ?, useremail = ?, usertype = ? where username = ?";
+        Object[] params = new Object[]{user.getName(), user.getSex(), user.getUserAddress(), user.getUserEmail(), user.getUserType(), user.getUsername()};
+
+        QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
+        int count = queryRunner.update(sql, params);
+
+        return count > 0;
+    }
 }

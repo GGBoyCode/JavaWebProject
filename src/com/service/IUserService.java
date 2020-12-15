@@ -14,4 +14,6 @@ public interface IUserService {
     public boolean UpdateSignInTime(User user) throws SQLException;
     //获取用户信息
     public User getUserInformation(String username) throws SQLException;
+    //更新用户信息
+    public boolean UpdateUserInformation(User user) throws SQLException;
 }

@@ -31,6 +31,15 @@ public class User {
         this.signUpTime = signUpTime;
     }
 
+    public User(String username, String name, int sex, String userEmail, String userAddress, int userType) {
+        this.username = username;
+        this.name = name;
+        this.sex = sex;
+        this.userEmail = userEmail;
+        this.userAddress = userAddress;
+        this.userType = userType;
+    }
+
     public String getUsername() {
         return username;
     }

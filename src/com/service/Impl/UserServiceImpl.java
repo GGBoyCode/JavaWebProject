@@ -32,6 +32,20 @@ public class UserServiceImpl implements IUserService {
         return true;
     }
 
+    //用户信息格式验证
+    private boolean UserVerify(User user){
+        String regex = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$";
+        if(user.getName() != null && user.getName().length() >= 2 &&
+            user.getUserEmail() != null && user.getUserEmail().matches(regex) &&
+            user.getUserType() >= 0 && user.getUserType() <= 2 &&
+            user.getSex() >= 0 && user.getSex() <= 1
+        ) {
+           return true;
+        }
+
+        return false;
+    }
+
     //用户登录验证
     public boolean SignIn(User user) throws SQLException{
         if(FormatVerify(user)){
@@ -67,6 +81,15 @@ public class UserServiceImpl implements IUserService {
             return null;
         } else {
             return userDao.getUserInformation(username);
+        }
+    }
+
+    //更新用户信息
+    public boolean UpdateUserInformation(User user) throws SQLException {
+        if(userDao.SelectByUsername(user.getUsername()) && UserVerify(user)) {
+            return userDao.UpdateUserInformation(user);
+        } else {
+            return false;
         }
     }
 }

@@ -16,4 +16,6 @@ public interface IUserDao {
     public boolean UpdateSignInTime(User user) throws SQLException;
     //查询用户信息
     public User getUserInformation(String username) throws SQLException;
+    //更新用户信息
+    public boolean UpdateUserInformation(User user) throws SQLException;
 }
