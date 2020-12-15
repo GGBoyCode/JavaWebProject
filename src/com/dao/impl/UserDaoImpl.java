@@ -24,8 +24,8 @@ public class UserDaoImpl implements IUserDao {
 
     //用户注册
     public boolean SignUp(User user) throws SQLException{
-        String sql = "insert into user(username,password,signuptime,signintime) values(?,?,?,?)";
-        Object[] params = new Object[]{user.getUsername(),user.getPassword(),user.getSignUpTime(),user.getSignInTime()};
+        String sql = "insert into user(username, password, sex, usertype, signuptime, signintime) values(?, ?, ?, ?, ?, ?)";
+        Object[] params = new Object[]{user.getUsername(), user.getPassword(), user.getSex(), user.getUserType(),user.getSignUpTime(), user.getSignInTime()};
 
         QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
         int count = queryRunner.update(sql,params);
