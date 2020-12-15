@@ -18,4 +18,8 @@ public interface IUserDao {
     public User getUserInformation(String username) throws SQLException;
     //更新用户信息
     public boolean UpdateUserInformation(User user) throws SQLException;
+    //修改用户密码
+    public boolean UpdatePassword(User user) throws SQLException;
+    //修改用户头像
+    public boolean UpdateUserPicture(User user) throws SQLException;
 }

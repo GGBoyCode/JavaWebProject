@@ -72,4 +72,26 @@ public class UserDaoImpl implements IUserDao {
 
         return count > 0;
     }
+
+    //修改用户密码
+    public boolean UpdatePassword(User user) throws SQLException {
+        String sql = "update user set password = ? where username = ?";
+        Object[] params = new Object[]{user.getPassword(), user.getUsername()};
+
+        QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
+        int count = queryRunner.update(sql, params);
+
+        return count > 0;
+    }
+
+    //修改用户头像
+    public boolean UpdateUserPicture(User user) throws SQLException {
+        String sql = "update user set userpicture = ? where username = ?";
+        Object[] params = new Object[]{user.getUserPicture(), user.getUsername()};
+
+        QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
+        int count = queryRunner.update(sql, params);
+
+        return count > 0;
+    }
 }
