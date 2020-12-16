@@ -3,7 +3,7 @@ package com.servlet.carousel;
 import com.alibaba.fastjson.JSONObject;
 import com.entity.Carousel;
 import com.service.ICarouselService;
-import com.service.Impl.CarouselServiceImpl;
+import com.service.impl.CarouselServiceImpl;
 import com.util.CarouselUtil;
 
 import javax.servlet.ServletException;
