@@ -3,7 +3,7 @@ package com.servlet.ware;
 import com.alibaba.fastjson.JSONObject;
 import com.entity.Ware;
 import com.service.IWareService;
-import com.service.impl.WareServiceImpl;
+import com.service.Impl.WareServiceImpl;
 import com.util.WareUtil;
 
 import javax.servlet.ServletException;
@@ -19,11 +19,13 @@ public class AddWareServlet extends HttpServlet {
     private IWareService wareService = new WareServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
         boolean isSuccess = true;
         try {
             //获取商品实例
             Ware ware = WareUtil.upload(request);
             if(ware != null) {
+                ware.setType(0);
                 isSuccess = wareService.addWare(ware);
             } else {
                 isSuccess = false;

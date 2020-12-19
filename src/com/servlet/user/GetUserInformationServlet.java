@@ -3,7 +3,7 @@ package com.servlet.user;
 import com.alibaba.fastjson.JSONObject;
 import com.entity.User;
 import com.service.IUserService;
-import com.service.impl.UserServiceImpl;
+import com.service.Impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

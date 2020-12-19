@@ -47,14 +47,14 @@ public class WareUtil {
                             return null;
                         }
                     } else {
-                        if("id".equals(item.getFieldName())) {
+                        if("name".equals(item.getFieldName())) {
                             //获取id
-                            ware.setId(Integer.parseInt(item.getString()));
+                            ware.setName(new String(item.getString().getBytes("ISO8859_1"), "utf-8"));
                         } else if("price".equals(item.getFieldName())) {
                             //获取price
-                            ware.setPrice(Integer.parseInt(item.getString()));
+                            ware.setPrice(Float.parseFloat(item.getString()));
                         } else if("description".equals(item.getFieldName())) {
-                            ware.setDescription(item.getString());
+                            ware.setDescription(new String(item.getString().getBytes("ISO8859_1"), "utf-8"));
                         }
                     }
                 }

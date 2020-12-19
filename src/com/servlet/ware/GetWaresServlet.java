@@ -3,7 +3,7 @@ package com.servlet.ware;
 import com.alibaba.fastjson.JSONObject;
 import com.entity.Ware;
 import com.service.IWareService;
-import com.service.impl.WareServiceImpl;
+import com.service.Impl.WareServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +22,9 @@ public class GetWaresServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isSuccess = true;
         List<Ware> list = null;
+        //设置返回编码格式
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
         try {
             //获取商品数据
             list =  wareService.getWares();

@@ -1,4 +1,4 @@
-package com.service.impl;
+package com.service.Impl;
 
 import com.dao.ICarouselDao;
 import com.dao.impl.CarouselDaoImpl;

@@ -1,4 +1,4 @@
-package com.service.impl;
+package com.service.Impl;
 
 import com.dao.IUserDao;
 import com.dao.impl.UserDaoImpl;

@@ -3,7 +3,8 @@ package com.servlet.ware;
 import com.alibaba.fastjson.JSONObject;
 import com.entity.Ware;
 import com.service.IWareService;
-import com.service.impl.WareServiceImpl;
+import com.service.Impl.WareServiceImpl;
+import sun.text.resources.cldr.lag.FormatData_lag;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,10 +21,11 @@ public class UpdateWareServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isSuccess = false;
 
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        int price = Integer.parseInt(request.getParameter("price"));
+        float price = Float.parseFloat(request.getParameter("price"));
         String description = request.getParameter("description");
-        Ware ware = new Ware(name, null, price, description);
+        Ware ware = new Ware(id, name, null, price, description);
 
         try {
             isSuccess = wareService.updateWareInformation(ware);

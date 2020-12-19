@@ -3,7 +3,7 @@ package com.servlet.ware;
 import com.alibaba.fastjson.JSONObject;
 import com.entity.Ware;
 import com.service.IWareService;
-import com.service.impl.WareServiceImpl;
+import com.service.Impl.WareServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +21,8 @@ public class GetWareByIdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isSuccess = true;
         int id = Integer.parseInt(request.getParameter("id"));
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
         Ware ware = null;
 
         try {
