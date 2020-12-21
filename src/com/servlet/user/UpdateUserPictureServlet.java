@@ -23,24 +23,23 @@ public class UpdateUserPictureServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isSuccess = true;
         try {
-            //获取用户信息
-            User user = userService.getUserInformation("18180443372");
-            //若用户有头像 则删除头像
-            if(user.getUserPicture() != null) {
-                //获取图片绝对位置
-                String path = getServletContext().getRealPath("/") + user.getUserPicture().replaceAll("/", "\\\\");
-                isSuccess = Util.delete(path);
-            }
-
-            if(isSuccess) {
-                //图片相对地址
-                String path = UserUtil.upload(request);
-                if(path != null) {
-                    user.setUserPicture(path);
-                    isSuccess = userService.UpdateUserPicture(user);
-                } else {
-                    isSuccess = false;
+            //图片相对地址
+            User user = UserUtil.upload(request);
+            //获取图像相对地址
+            if(user != null) {
+                String url = userService.getUserInformation(user.getUsername()).getUserPicture();
+                //若用户有头像 则删除头像
+                if(url != null) {
+                    //获取图片绝对位置
+                    String path = getServletContext().getRealPath("/") + url.replaceAll("/", "\\\\");
+                    isSuccess = Util.delete(path);
                 }
+
+                if(isSuccess) {
+                    isSuccess = userService.UpdateUserPicture(user);
+                }
+            } else {
+                isSuccess = false;
             }
         } catch (SQLException e) {
             isSuccess = false;

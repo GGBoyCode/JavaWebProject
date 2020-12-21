@@ -15,8 +15,9 @@ public class UserUtil {
     private static final String DIRNAME = "avatar";
 
     //上传图片
-    public static String upload(HttpServletRequest request) throws Exception {
+    public static User upload(HttpServletRequest request) throws Exception {
         String path = null;
+        User user = new User();
         //检查是否为上传项
         if(ServletFileUpload.isMultipartContent(request)) {
             List<FileItem> fileItems = Util.getFileItems(request, DIRNAME);
@@ -35,8 +36,8 @@ public class UserUtil {
                         String suffix = filename.substring(pointIndex + 1);
                         //重命名 在后面加8个随机字符串防止名字重复
                         filename = filename.substring(0, pointIndex) + RandomStringUtils.randomAlphanumeric(8) + "." + suffix;
-                        //设置轮播图路径
-                        path = Util.UPLOAD_PATH + "/" + DIRNAME + "/" + filename;
+                        //设置头像路径
+                        user.setUserPicture(Util.UPLOAD_PATH + "/" + DIRNAME + "/" + filename);
                         //检验上传是否为图片
                         if(suffix.matches("jpg|jpeg|png|")) {
                             //文件位置
@@ -47,11 +48,17 @@ public class UserUtil {
                         } else {
                             return null;
                         }
+                    } else {
+                        if("username".equals(item.getFieldName())) {
+                            user.setUsername(item.getString());
+                        } else {
+                            return null;
+                        }
                     }
                 }
             }
         }
 
-        return path;
+        return user;
     }
 }

@@ -26,9 +26,9 @@ public class UpdateUserInformationServlet extends HttpServlet {
         int userType = Integer.parseInt(request.getParameter("userType"));
         String userEmail = request.getParameter("userEmail");
         String userAddress = request.getParameter("userAddress");
-
+        String username = request.getParameter("username");
         //实例化用户类
-        User user = new User("18180443372", name, sex, userEmail, userAddress, userType);
+        User user = new User(username, name, sex, userEmail, userAddress, userType);
         try {
             isSuccess = userService.UpdateUserInformation(user);
         } catch (SQLException e) {

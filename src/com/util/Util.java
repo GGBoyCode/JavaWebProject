@@ -26,7 +26,9 @@ public class Util {
         //缓存区域路径(相对当前应用目录)
         String memoryPath = request.getServletContext().getRealPath("/") + File.separator + MEMORY_PATH;
         File repDir = new File(memoryPath);
-        if(!repDir.exists()) repDir.mkdir();
+        if(!repDir.exists()) {
+            repDir.mkdir();
+        }
         //如果文件不存在则创建
         factory.setRepository(repDir);
 
@@ -38,11 +40,13 @@ public class Util {
         upload.setSizeMax(MAX_REQUEST_SIZE);
 
         //上传文件路径(相对当前应用目录)
-        Path = request.getServletContext().getRealPath("/") + File.separator + UPLOAD_PATH + File.separator;
+        Path = request.getServletContext().getRealPath("/")+ File.separator + UPLOAD_PATH + File.separator;
         String uploadPath = Path + dirName;
         File uploadDir = new File(uploadPath);
         //如果文件不存在则创建
-        if(!uploadDir.exists()) uploadDir.mkdir();
+        if(!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
 
         //解析request
         return upload.parseRequest(request);

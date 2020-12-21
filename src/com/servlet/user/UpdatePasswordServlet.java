@@ -20,8 +20,9 @@ public class UpdatePasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isSuccess = true;
         //获取密码
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
-        User user = new User("18180443372", password);
+        User user = new User(username, password);
 
         try {
             isSuccess = userService.UpdatePassword(user);
