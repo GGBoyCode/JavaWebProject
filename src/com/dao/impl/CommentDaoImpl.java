@@ -4,10 +4,11 @@ import com.dao.ICommentDao;
 import com.entity.Comment;
 import com.util.DBCP;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class CommentDaoImpl implements ICommentDao {
     //添加评论
@@ -32,12 +33,12 @@ public class CommentDaoImpl implements ICommentDao {
     }
 
     //获取评论
-    public Comment getComment(int id) throws SQLException {
-        String sql = "select * from comment where id = ?";
+    public List<Comment> getComment(int articleId) throws SQLException {
+        String sql = "select * from comment where articleid = ?";
 
         QueryRunner  queryRunner = new QueryRunner(DBCP.dataSource);
 
-        return queryRunner.query(sql, new BeanHandler<Comment>(Comment.class), id);
+        return queryRunner.query(sql, new BeanListHandler<Comment>(Comment.class), articleId);
     }
 
     //点赞评论

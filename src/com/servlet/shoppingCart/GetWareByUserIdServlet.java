@@ -19,6 +19,10 @@ import java.util.List;
 public class GetWareByUserIdServlet extends HttpServlet {
     private IShoppingCartService shoppingCartService = new ShoppingCartServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //设置字符编码
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
+
         boolean isSuccess = true;
         String userId = request.getParameter("userId");
         List<Ware> list = null;

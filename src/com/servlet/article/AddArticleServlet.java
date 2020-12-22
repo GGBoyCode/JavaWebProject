@@ -22,6 +22,9 @@ public class AddArticleServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isSuccess = true;
+        //设置字符编码
+        request.setCharacterEncoding("utf-8");
+
         String userId = request.getParameter("userId");
         String title = request.getParameter("title");
         String content = request.getParameter("content");

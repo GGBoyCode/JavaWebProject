@@ -22,6 +22,9 @@ public class AddCommentServlet extends HttpServlet {
     private ICommentService commentService = new CommentServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //设置字符编码
+        request.setCharacterEncoding("utf-8");
+
         boolean isSuccess = true;
         String userId = request.getParameter("userId");
         int articleId = Integer.parseInt(request.getParameter("articleId"));

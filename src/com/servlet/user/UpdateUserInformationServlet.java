@@ -19,6 +19,9 @@ public class UpdateUserInformationServlet extends HttpServlet {
     private IUserService userService = new UserServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //设置字符编码
+        request.setCharacterEncoding("utf-8");
+
         boolean isSuccess = true;
         //获取用户修改信息
         String name = request.getParameter("name");

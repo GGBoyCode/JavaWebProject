@@ -2,8 +2,11 @@ package com.servlet.comment;
 
 import com.alibaba.fastjson.JSONObject;
 import com.entity.Comment;
+import com.entity.User;
 import com.service.ICommentService;
+import com.service.IUserService;
 import com.service.Impl.CommentServiceImpl;
+import com.service.Impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,18 +16,34 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/comment/get")
 public class GetCommentServlet extends HttpServlet {
     private ICommentService commentService = new CommentServiceImpl();
+    private IUserService userService = new UserServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean isSuccess = true;
-        int id = Integer.parseInt(request.getParameter("id"));
-        Comment comment = null;
+        //设置字符编码
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
 
+        boolean isSuccess = true;
+        int articleId = Integer.parseInt(request.getParameter("articleId"));
+        List<Comment> list = null;
+        JSONObject[] objs = null;
         try {
-            comment = commentService.getComment(id);
-            if(comment == null) isSuccess = false;
+            list = commentService.getComment(articleId);
+            int n = list.size();
+            objs = new JSONObject[n];
+            if(list != null) {
+                for(int i = 0;i < n;i++) {
+                    User user = userService.getUserInformation(list.get(i).getUserId());
+                    objs[i] = JSONObject.parseObject(JSONObject.toJSONString(list.get(i)));
+                    objs[i].put("user", user);
+                }
+            } else {
+                isSuccess = false;
+            }
         } catch (SQLException e) {
             isSuccess = false;
             e.printStackTrace();
@@ -35,7 +54,7 @@ public class GetCommentServlet extends HttpServlet {
             } else {
                 jsonObject.put("code", 10000);
             }
-            jsonObject.put("data", comment);
+            jsonObject.put("data", objs);
             PrintWriter out = response.getWriter();
             out.print(jsonObject);
         }

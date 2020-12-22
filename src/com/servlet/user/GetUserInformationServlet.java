@@ -18,6 +18,10 @@ public class GetUserInformationServlet extends HttpServlet {
     private IUserService userService = new UserServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //设置字符编码
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
+
         String username = request.getParameter("username");
         boolean isSuccess = true;
         User user = new User();

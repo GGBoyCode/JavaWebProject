@@ -10,6 +10,7 @@ import com.entity.Comment;
 import com.service.ICommentService;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class CommentServiceImpl implements ICommentService {
     private IUserDao userDao = new UserDaoImpl();
@@ -35,9 +36,9 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     //获取评论
-    public Comment getComment(int id) throws SQLException {
-        if(commentDao.existComment(id)) {
-            return commentDao.getComment(id);
+    public List<Comment> getComment(int articleId) throws SQLException {
+        if(articleDao.existId(articleId)) {
+            return commentDao.getComment(articleId);
         } else {
             return null;
         }
