@@ -35,7 +35,7 @@ public class CommentDaoImpl implements ICommentDao {
     //获取评论
     public List<Comment> getComment(int articleId, int page, int limit) throws SQLException {
         String sql = "select * from comment where articleid = ? limit ?, ?";
-        Object[] params = new Object[]{articleId, page, limit};
+        Object[] params = new Object[]{articleId, page * limit, limit};
 
         QueryRunner  queryRunner = new QueryRunner(DBCP.dataSource);
 
