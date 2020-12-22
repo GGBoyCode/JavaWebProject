@@ -33,12 +33,22 @@ public class CommentDaoImpl implements ICommentDao {
     }
 
     //获取评论
-    public List<Comment> getComment(int articleId) throws SQLException {
-        String sql = "select * from comment where articleid = ?";
+    public List<Comment> getComment(int articleId, int page, int limit) throws SQLException {
+        String sql = "select * from comment where articleid = ? limit ?, ?";
+        Object[] params = new Object[]{articleId, page, limit};
 
         QueryRunner  queryRunner = new QueryRunner(DBCP.dataSource);
 
-        return queryRunner.query(sql, new BeanListHandler<Comment>(Comment.class), articleId);
+        return queryRunner.query(sql, new BeanListHandler<Comment>(Comment.class), params);
+    }
+
+    //获取评论数
+    public int getCommentCount(int articleId) throws SQLException {
+        String sql = "select count(*) from comment where articleid = ? ";
+
+        QueryRunner  queryRunner = new QueryRunner(DBCP.dataSource);
+
+        return queryRunner.query(sql, new ScalarHandler<Long>(), articleId).intValue();
     }
 
     //点赞评论

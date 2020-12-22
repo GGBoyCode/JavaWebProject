@@ -41,8 +41,13 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     //获取全部文章
-    public List<Article> getAllArticle() throws SQLException {
-        return articleDao.getAllArticle();
+    public List<Article> getAllArticle(int page, int limit) throws SQLException {
+        return articleDao.getAllArticle(page, limit);
+    }
+
+    //获取文章数
+    public int getArticleCount() throws SQLException {
+        return articleDao.getArticleCount();
     }
 
     //为文章点赞

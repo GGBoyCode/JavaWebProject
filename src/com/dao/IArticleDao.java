@@ -13,7 +13,9 @@ public interface IArticleDao {
     //获取文章
     public Article getArticle(int id) throws SQLException;
     //获取全部文章
-    public List<Article> getAllArticle() throws SQLException;
+    public List<Article> getAllArticle(int page, int limit) throws SQLException;
+    //查询文章数
+    public int getArticleCount() throws SQLException;
     //查询文章是否存在
     public boolean existId(int id) throws SQLException;
     //为文章点赞

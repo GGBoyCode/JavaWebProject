@@ -11,7 +11,9 @@ public interface ICommentDao {
     //删除评论
     public boolean deleteComment(int id) throws SQLException;
     //获取评论
-    public List<Comment> getComment(int articleId) throws SQLException;
+    public List<Comment> getComment(int articleId, int page, int limit) throws SQLException;
+    //获取评论数
+    public int getCommentCount(int articleId) throws SQLException;
     //点赞评论
     public boolean goodComment(int id) throws SQLException;
     //评论是否存在

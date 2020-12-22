@@ -1,13 +1,8 @@
 package com.servlet.article;
 
 import com.alibaba.fastjson.JSONObject;
-import com.entity.Article;
-import com.entity.User;
 import com.service.IArticleService;
-import com.service.IUserService;
 import com.service.Impl.ArticleServiceImpl;
-import com.service.Impl.UserServiceImpl;
-import com.util.DBCP;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,35 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet("/article/all")
-public class GetAllArticleServlet extends HttpServlet {
+@WebServlet("/article/count")
+public class GetArticleCountServlet extends HttpServlet {
     private IArticleService articleService = new ArticleServiceImpl();
-    private IUserService userService = new UserServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //设置字符编码
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=UTF-8");
-
-        Boolean isSuccess = true;
-        int page = Integer.parseInt(request.getParameter("page"));
-        int limit = Integer.parseInt(request.getParameter("limit"));
-        List<Article> list = null;
-        JSONObject[] objs = null;
+        boolean isSuccess = true;
+        int count = 0;
         try {
-            list = articleService.getAllArticle(page, limit);
-            int n = list.size();
-            objs = new JSONObject[n];
-            if(list != null) {
-                for(int i = 0;i < n;i++) {
-                    User user = userService.getUserInformation(list.get(i).getUserId());
-                    objs[i] = JSONObject.parseObject(JSONObject.toJSONString(list.get(i)));
-                    objs[i].put("user", user);
-                }
-            } else {
-                isSuccess = false;
-            }
+            count = articleService.getArticleCount();
         } catch (SQLException e) {
             isSuccess = false;
             e.printStackTrace();
@@ -56,8 +31,7 @@ public class GetAllArticleServlet extends HttpServlet {
             } else {
                 jsonObject.put("code", 10000);
             }
-
-            jsonObject.put("data", objs);
+            jsonObject.put("count", count);
             PrintWriter out = response.getWriter();
             out.print(jsonObject);
         }

@@ -13,7 +13,9 @@ public interface IArticleService {
     //获取文章
     public Article getArticle(int id) throws SQLException;
     //获取全部文章
-    public List<Article> getAllArticle() throws SQLException;
+    public List<Article> getAllArticle(int page, int limit) throws SQLException;
+    //获取文章数
+    public int getArticleCount() throws SQLException;
     //为文章点赞
     public boolean goodArticle(int id) throws SQLException;
     //收藏文章

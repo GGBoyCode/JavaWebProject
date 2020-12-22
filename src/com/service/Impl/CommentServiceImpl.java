@@ -36,13 +36,23 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     //获取评论
-    public List<Comment> getComment(int articleId) throws SQLException {
+    public List<Comment> getComment(int articleId, int page, int limit) throws SQLException {
         if(articleDao.existId(articleId)) {
-            return commentDao.getComment(articleId);
+            return commentDao.getComment(articleId, page, limit);
         } else {
             return null;
         }
     }
+
+    //获取评论
+    public int getCommentCount(int articleId) throws SQLException {
+        if(articleDao.existId(articleId)) {
+            return commentDao.getCommentCount(articleId);
+        } else {
+            return 0;
+        }
+    }
+
     //点赞评论
     public boolean goodComment(int id) throws SQLException {
         if(commentDao.existComment(id)) {

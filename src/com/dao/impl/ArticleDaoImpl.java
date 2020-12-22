@@ -43,12 +43,22 @@ public class ArticleDaoImpl implements IArticleDao {
     }
 
     //获取全部文章
-    public List<Article> getAllArticle() throws SQLException {
-        String sql = "select * from article";
-
+    public List<Article> getAllArticle(int page, int limit) throws SQLException {
+        String sql = "select * from article limit ?, ?";
+        Object[] params = new Object[]{page * limit, limit};
         QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
 
-        return queryRunner.query(sql, new BeanListHandler<>(Article.class));
+        return queryRunner.query(sql, new BeanListHandler<>(Article.class), params);
+    }
+
+    //查询文章数
+    public int getArticleCount() throws SQLException {
+        String sql = "select count(*) from article";
+
+        QueryRunner queryRunner = new QueryRunner(DBCP.dataSource);
+        int count = queryRunner.query(sql, new ScalarHandler<Long>()).intValue();
+
+        return count;
     }
 
     //查询文章是否存在
